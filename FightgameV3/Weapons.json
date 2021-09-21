@@ -1,0 +1,20 @@
+[
+    {
+        "type": "sword",
+        "damageMax": 10,
+        "damageMin": 5,
+        "critChance": 0.3,
+        "stunChance": 0.2,
+        "poisonChance": 0,
+        "accuracy": 0.9
+    },
+    {
+        "type": "bow",
+        "damageMax": 15,
+        "damageMin": 8,
+        "critChance": 0.6,
+        "stunChance": 0.3,
+        "poisonChance": 0,
+        "accuracy": 0.6
+    }
+]
