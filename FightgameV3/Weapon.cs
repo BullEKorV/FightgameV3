@@ -4,9 +4,10 @@ using System.Numerics;
 using System.IO;
 using Newtonsoft.Json;
 
-public class Weapons
+class Weapons
 {
-    static List<Weapon> GetWeaponsJson()
+    public static List<Weapon> allWeapons = GetWeaponsJson();
+    public static List<Weapon> GetWeaponsJson()
     {
         string response = File.ReadAllText("Weapons.json");
 
@@ -17,6 +18,7 @@ public class Weapons
 }
 class Weapon
 {
+    Random rnd = new Random();
     public string type { get; set; }
     public int damageMax { get; set; }
     public int damageMin { get; set; }
@@ -24,4 +26,18 @@ class Weapon
     public float stunChance { get; set; }
     public float posionChance { get; set; }
     public float accuracy { get; set; }
+    public void Damage(Fighter target)
+    {
+        if (rnd.NextDouble() > accuracy)
+        {
+            Console.WriteLine("Missed oopsi lmao");
+            return;
+        }
+        int damage = rnd.Next(damageMin, damageMax);
+        bool didCrit = rnd.NextDouble() < critChance;
+        bool didStun = rnd.NextDouble() < stunChance;
+        bool didPoison = rnd.NextDouble() < posionChance;
+
+        target.TakeDamage(damage, didCrit, didStun, didPoison, type);
+    }
 }

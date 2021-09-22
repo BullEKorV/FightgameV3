@@ -12,7 +12,18 @@ class Program
         p1.target = p2;
         p2.target = p1;
 
-        StatusBar(p1, p2);
+        Console.Clear();
+
+        Fighter p = p1;
+
+        while (p1.GetAlive() || p2.GetAlive())
+        {
+            StatusBar(p1, p2);
+            p.ChooseWeapon();
+
+
+            p = p == p1 ? p2 : p1;
+        }
 
         Console.ReadLine();
     }
@@ -37,7 +48,7 @@ class Program
         Console.ResetColor();
 
         // Player 2
-        Console.CursorLeft = Console.WindowWidth - p2.name.Length - 11 - ((char)p2.hp);
+        Console.CursorLeft = Console.WindowWidth - p2.name.Length - 11 - p2.hp.ToString().Length;
 
         Console.ForegroundColor = ConsoleColor.White;
         if (p2.GetStunned()) Console.ForegroundColor = ConsoleColor.Red;
