@@ -1,6 +1,7 @@
 [
     {
-        "type": "sword",
+        "weapon": "sword",
+        "description": "sharp af",
         "damageMax": 10,
         "damageMin": 5,
         "critChance": 0.3,
@@ -9,12 +10,33 @@
         "accuracy": 0.9
     },
     {
-        "type": "bow",
+        "weapon": "bow",
+        "description": "shoots big",
         "damageMax": 15,
         "damageMin": 8,
         "critChance": 0.6,
         "stunChance": 0.3,
         "poisonChance": 0,
-        "accuracy": 0.6
+        "accuracy": 0.8
+    },
+    {
+        "weapon": "mace",
+        "description": "stuns :O",
+        "damageMax": 0,
+        "damageMin": 0,
+        "critChance": 0,
+        "stunChance": 1,
+        "poisonChance": 0,
+        "accuracy": 1
+    },
+    {
+        "weapon": "elixir",
+        "description": "shrek's favorite ;)",
+        "damageMax": 0,
+        "damageMin": 0,
+        "critChance": 0,
+        "stunChance": 0,
+        "poisonChance": 1,
+        "accuracy": 1
     }
 ]

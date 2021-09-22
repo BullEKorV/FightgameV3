@@ -9,6 +9,7 @@ class Fighter
     private bool isStunned = false;
     private bool isPoisoned = false;
     public Fighter target;
+    public Random rnd = new Random();
     public Fighter()
     {
         string input = Console.ReadLine().TrimStart().TrimEnd();
@@ -20,45 +21,79 @@ class Fighter
         }
         name = input;
     }
+    public void Turn()
+    {
+        if (isStunned)
+        {
+            if (rnd.NextDouble() < 0.4)
+            {
+                Console.WriteLine("You're no longer stunned!");
+                isStunned = false;
+            }
+            else
+            {
+                Console.WriteLine("You're still stunned ");
+                return;
+            }
+        }
+        if (isPoisoned)
+        {
+            if (rnd.NextDouble() < 0.3)
+            {
+                Console.WriteLine("You're no longer sick!");
+                isPoisoned = false;
+            }
+            else
+            {
+                int poisonDamage = rnd.Next(4, 9);
+                Console.WriteLine($"You're feeling ill... You took {poisonDamage} in damage");
+                hp -= poisonDamage;
+            }
+        }
+        ChooseWeapon();
+    }
     public void ChooseWeapon()
     {
+        Console.WriteLine($"\nChoose a weapon of the following:");
         for (int i = 0; i < Weapons.allWeapons.Count; i++)
         {
-            Console.WriteLine(i + 1 + ": " + Weapons.allWeapons[i].type.ToUpperInvariant());
+            Console.CursorLeft += 1;
+            Console.Write(i + 1 + ": " + Weapons.allWeapons[i].weapon.ToUpper());
+            Console.WriteLine(" | " + Weapons.allWeapons[i].description);
         }
-        Console.WriteLine($"Choose a number between 1 and {Weapons.allWeapons.Count}");
         int choiceInt = -1;
         while (choiceInt < 1 || choiceInt >= Weapons.allWeapons.Count + 1)
         {
+            Console.Write($"Choise: ");
             string choice = Console.ReadLine();
             int.TryParse(choice, out choiceInt);
         }
-
         Weapons.allWeapons[choiceInt - 1].Damage(target);
     }
     public void TakeDamage(int amount, bool didCrit, bool didStun, bool didPoison, string weapon)
     {
+        Console.WriteLine();
         if (didCrit)
         {
-            Console.WriteLine($"Nice crit!\nYou decimated {target.name} with {amount * 2} damage with your {weapon}!");
-            target.hp -= amount * 2;
+            Console.WriteLine($"You landed a critical on {name} dealing {amount * 2} damage with your {weapon}!");
+            hp -= amount * 2;
         }
-        else
+        else if (amount > 0)
         {
-            Console.WriteLine($"You dealt {amount} damage to {target.name} with your {weapon}!");
-            target.hp -= amount;
+            Console.WriteLine($"You dealt {amount} damage to {name} with your {weapon}!");
+            hp -= amount;
         }
-        Thread.Sleep(1000);
         if (didStun)
         {
-            Console.WriteLine($"You stunned {target.name} aswell! Wakey wakey");
-            target.isStunned = true;
+            Console.WriteLine($"\nYou stunned {name} aswell! Wakey wakey");
+            isStunned = true;
         }
         if (didPoison)
         {
-            Console.WriteLine($"{target.name} got poisoned! No antibiotics for you ;)");
-            target.isPoisoned = true;
+            Console.WriteLine($"\n{name} got poisoned! No antibiotics for you ;)");
+            isPoisoned = true;
         }
+        hp = Math.Max(hp, 0);
     }
     public bool GetAlive()
     {
