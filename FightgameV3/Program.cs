@@ -18,11 +18,13 @@ class Program
 
         while (p1.GetAlive() || p2.GetAlive())
         {
+            Console.Clear();
             StatusBar(p1, p2);
             p.ChooseWeapon();
-
+            // StatusBar(p1, p2);
 
             p = p == p1 ? p2 : p1;
+            Console.ReadKey();
         }
 
         Console.ReadLine();
