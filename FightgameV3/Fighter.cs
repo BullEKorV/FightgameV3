@@ -14,9 +14,9 @@ class Fighter
     {
         string input = Console.ReadLine().TrimStart().TrimEnd();
 
-        while (input.Length < 3 || input.Length > 10)
+        while (input.Length < 3 || input.Length > 12)
         {
-            Console.WriteLine("Name can't be shorter than 3 or longer than 10 characters");
+            Console.WriteLine("Name can't be shorter than 3 or longer than 12 characters");
             input = Console.ReadLine();
         }
         name = input;
