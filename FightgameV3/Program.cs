@@ -14,7 +14,7 @@ class Program
 
         Fighter p = p1;
 
-        while (p1.GetAlive() || p2.GetAlive())
+        while (p1.GetAlive() && p2.GetAlive())
         {
             Console.Clear();
             StatusBar(p, p1, p2);
@@ -26,7 +26,6 @@ class Program
             Console.Write("Press anything to continue...");
             Console.ReadKey();
         }
-
         Console.ReadLine();
     }
     public static void StatusBar(Fighter p, Fighter p1, Fighter p2)

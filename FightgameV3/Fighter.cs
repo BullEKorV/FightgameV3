@@ -23,6 +23,8 @@ class Fighter
     }
     public void Turn()
     {
+        Console.Write(new string('_', Console.WindowWidth));
+        Console.WriteLine();
         if (isStunned)
         {
             if (rnd.NextDouble() < 0.4)
@@ -40,13 +42,13 @@ class Fighter
         {
             if (rnd.NextDouble() < 0.3)
             {
-                Console.WriteLine("You're no longer sick!");
+                Console.WriteLine("You're no longer sick!\n");
                 isPoisoned = false;
             }
             else
             {
                 int poisonDamage = rnd.Next(4, 9);
-                Console.WriteLine($"You're feeling ill... You took {poisonDamage} in damage");
+                Console.WriteLine($"You're feeling ill... You took {poisonDamage} in damage\n");
                 hp -= poisonDamage;
             }
         }
@@ -54,7 +56,7 @@ class Fighter
     }
     public void ChooseWeapon()
     {
-        Console.WriteLine($"\nChoose a weapon of the following:");
+        Console.WriteLine($"Choose a weapon of the following:");
         for (int i = 0; i < Weapons.allWeapons.Count; i++)
         {
             Console.CursorLeft += 1;
@@ -69,6 +71,11 @@ class Fighter
             int.TryParse(choice, out choiceInt);
         }
         Weapons.allWeapons[choiceInt - 1].Damage(target);
+        if (target.hp == 0)
+        {
+            Console.WriteLine(target.name);
+            target.isAlive = false;
+        }
     }
     public void TakeDamage(int amount, bool didCrit, bool didStun, bool didPoison, string weapon)
     {
