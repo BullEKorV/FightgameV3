@@ -54,7 +54,7 @@ class Fighter
         UI.StatusBar();
         ChooseWeapon();
     }
-    public void ChooseWeapon()
+    void ChooseWeapon()
     {
         Console.WriteLine($"Choose a weapon of the following:");
         for (int i = 0; i < Weapons.allWeapons.Count; i++)
