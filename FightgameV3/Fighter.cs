@@ -24,17 +24,16 @@ class Fighter
     public void Turn()
     {
         Console.Write(new string('_', Console.WindowWidth));
-        Console.WriteLine();
         if (isStunned)
         {
             if (rnd.NextDouble() < 0.4)
             {
-                Console.WriteLine("You're no longer stunned!");
+                Console.WriteLine("\nYou're no longer stunned!");
                 isStunned = false;
             }
             else
             {
-                Console.WriteLine("You're still stunned ");
+                Console.WriteLine("\nYou're still stunned");
                 return;
             }
         }
@@ -42,16 +41,17 @@ class Fighter
         {
             if (rnd.NextDouble() < 0.3)
             {
-                Console.WriteLine("You're no longer sick!\n");
+                Console.WriteLine("\nYou're no longer sick!");
                 isPoisoned = false;
             }
             else
             {
                 int poisonDamage = rnd.Next(4, 9);
-                Console.WriteLine($"You're feeling ill... You took {poisonDamage} in damage\n");
+                Console.WriteLine($"\nYou're feeling ill... You took {poisonDamage} in damage");
                 hp -= poisonDamage;
             }
         }
+        UI.StatusBar();
         ChooseWeapon();
     }
     public void ChooseWeapon()
@@ -82,22 +82,22 @@ class Fighter
         Console.WriteLine();
         if (didCrit)
         {
-            Console.WriteLine($"You landed a critical on {name} dealing {amount * 2} damage with your {weapon}!");
+            Console.WriteLine($"You landed a critical on {name} dealing {amount * 2} damage with your {weapon}!\n");
             hp -= amount * 2;
         }
         else if (amount > 0)
         {
-            Console.WriteLine($"You dealt {amount} damage to {name} with your {weapon}!");
+            Console.WriteLine($"You dealt {amount} damage to {name} with your {weapon}!\n");
             hp -= amount;
         }
         if (didStun)
         {
-            Console.WriteLine($"\nYou stunned {name} aswell! Wakey wakey");
+            Console.WriteLine($"You stunned {name} aswell! Wakey wakey");
             isStunned = true;
         }
         if (didPoison)
         {
-            Console.WriteLine($"\n{name} got poisoned! No antibiotics for you ;)");
+            Console.WriteLine($"{name} got poisoned! No antibiotics for you ;)");
             isPoisoned = true;
         }
         hp = Math.Max(hp, 0);

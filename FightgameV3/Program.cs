@@ -9,70 +9,29 @@ class Program
         Console.WriteLine("Player two choose a name: ");
         Fighter p2 = new Fighter();
 
+        UI ui = new UI();
+        UI.p1 = p1;
+        UI.p2 = p2;
+
         p1.target = p2;
         p2.target = p1;
 
         Fighter p = p1;
+        UI.p = p;
 
         while (p1.GetAlive() && p2.GetAlive())
         {
             Console.Clear();
-            StatusBar(p, p1, p2);
+            UI.StatusBar();
             p.Turn();
-            StatusBar(p, p1, p2);
+            UI.StatusBar();
 
             p = p == p1 ? p2 : p1;
+            UI.p = p;
 
             Console.Write("Press anything to continue...");
             Console.ReadKey();
         }
         Console.ReadLine();
-    }
-    public static void StatusBar(Fighter p, Fighter p1, Fighter p2)
-    {
-        // moves the cursor to top to write the statusbar
-        int x = Console.CursorLeft;
-        int y = Console.CursorTop;
-
-        Console.SetCursorPosition(0, 0);
-        Console.Write(new string(' ', Console.WindowWidth));
-        Console.SetCursorPosition(1, 0);
-
-        // Player 1
-        Console.ForegroundColor = ConsoleColor.White;
-        if (p1.GetStunned()) Console.ForegroundColor = ConsoleColor.Red;
-        else if (p1.GetPoisoned()) Console.ForegroundColor = ConsoleColor.DarkGreen;
-        else if (p1.GetStunned() && p1.GetPoisoned()) Console.ForegroundColor = ConsoleColor.DarkMagenta;
-        else if (!p1.GetAlive()) Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.Write(p1.name);
-        Console.ResetColor();
-        Console.Write("'s health: ");
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write(p1.hp);
-        Console.ResetColor();
-
-        // Player 2
-        Console.CursorLeft = Console.WindowWidth - p2.name.Length - 12 - p2.hp.ToString().Length;
-
-        Console.ForegroundColor = ConsoleColor.White;
-        if (p2.GetStunned()) Console.ForegroundColor = ConsoleColor.Red;
-        else if (p2.GetPoisoned()) Console.ForegroundColor = ConsoleColor.DarkGreen;
-        else if (p2.GetStunned() && p2.GetPoisoned()) Console.ForegroundColor = ConsoleColor.DarkMagenta;
-        else if (!p2.GetAlive()) Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.Write(p2.name);
-        Console.ResetColor();
-        Console.Write("'s health: ");
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write(p2.hp);
-        Console.ResetColor();
-
-        // Write current players turn
-        Console.SetCursorPosition(Console.WindowWidth / 2 - p1.name.Length / 2 - 4, 0);
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.Write(p.name + "'s turn");
-        Console.ResetColor();
-
-        // Restore previous position
-        Console.SetCursorPosition(x, y + 1);
     }
 }
