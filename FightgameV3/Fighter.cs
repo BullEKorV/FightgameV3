@@ -51,7 +51,7 @@ class Fighter
                 hp -= poisonDamage;
             }
         }
-        UI.StatusBar();
+        UI.instance.StatusBar();
         ChooseWeapon();
     }
     void ChooseWeapon()

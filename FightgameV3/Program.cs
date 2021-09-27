@@ -9,25 +9,19 @@ class Program
         Console.WriteLine("Player two choose a name: ");
         Fighter p2 = new Fighter();
 
-        UI ui = new UI();
-        UI.p1 = p1;
-        UI.p2 = p2;
-
-        p1.target = p2;
-        p2.target = p1;
+        UI ui = new UI(p1, p2);
 
         Fighter p = p1;
-        UI.p = p;
 
         while (p1.GetAlive() && p2.GetAlive())
         {
             Console.Clear();
-            UI.StatusBar();
+            UI.instance.StatusBar();
             p.Turn();
-            UI.StatusBar();
+            UI.instance.StatusBar();
 
             p = p == p1 ? p2 : p1;
-            UI.p = p;
+            UI.instance.p = p;
 
             Console.Write("Press anything to continue...");
             Console.ReadKey();

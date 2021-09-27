@@ -2,8 +2,24 @@ using System;
 
 class UI
 {
-    public static Fighter p, p1, p2;
-    public static void StatusBar()
+    public Fighter p, p1, p2;
+
+    public static UI instance;
+
+    public UI(Fighter p1, Fighter p2)
+    {
+        this.p1 = p1;
+        this.p2 = p2;
+
+        p1.target = p2;
+        p2.target = p1;
+
+        this.p = p1;
+
+        instance = this;
+
+    }
+    public void StatusBar()
     {
         // moves the cursor to top to write the statusbar
         int x = Console.CursorLeft;
