@@ -21,13 +21,13 @@
     },
     {
         "weapon": "mace",
-        "description": "stuns :O",
-        "damageMax": 0,
-        "damageMin": 0,
+        "description": "high chance to stun your enemy",
+        "damageMax": 8,
+        "damageMin": 4,
         "critChance": 0,
-        "stunChance": 1,
+        "stunChance": 0.9,
         "poisonChance": 0,
-        "accuracy": 1
+        "accuracy": 0.8
     },
     {
         "weapon": "elixir",
@@ -36,6 +36,16 @@
         "damageMin": 0,
         "critChance": 0,
         "stunChance": 0,
+        "poisonChance": 1,
+        "accuracy": 1
+    },
+    {
+        "weapon": "charlie",
+        "description": "uwu",
+        "damageMax": 10000,
+        "damageMin": 1000,
+        "critChance": 1,
+        "stunChance": 1,
         "poisonChance": 1,
         "accuracy": 1
     }

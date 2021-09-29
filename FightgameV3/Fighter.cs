@@ -1,6 +1,4 @@
 using System;
-using System.Threading;
-
 class Fighter
 {
     public string name;
@@ -26,7 +24,7 @@ class Fighter
         Console.Write(new string('_', Console.WindowWidth));
         if (isStunned)
         {
-            if (rnd.NextDouble() < 0.4)
+            if (rnd.NextDouble() < 0.7)
             {
                 Console.WriteLine("\nYou're no longer stunned!");
                 isStunned = false;
@@ -39,16 +37,15 @@ class Fighter
         }
         if (isPoisoned)
         {
-            if (rnd.NextDouble() < 0.3)
+            int poisonDamage = rnd.Next(4, 9);
+            hp -= poisonDamage;
+
+            Console.WriteLine($"\nYou're feeling ill... You took {poisonDamage} in damage");
+
+            if (rnd.NextDouble() < 0.6)
             {
                 Console.WriteLine("\nYou're no longer sick!");
                 isPoisoned = false;
-            }
-            else
-            {
-                int poisonDamage = rnd.Next(4, 9);
-                Console.WriteLine($"\nYou're feeling ill... You took {poisonDamage} in damage");
-                hp -= poisonDamage;
             }
         }
         UI.instance.StatusBar();
@@ -57,6 +54,7 @@ class Fighter
     void ChooseWeapon()
     {
         Console.WriteLine($"Choose a weapon of the following:");
+
         for (int i = 0; i < Weapons.allWeapons.Count; i++)
         {
             Console.CursorLeft += 1;
@@ -90,6 +88,10 @@ class Fighter
             Console.WriteLine($"You dealt {amount} damage to {name} with your {weapon}!\n");
             hp -= amount;
         }
+        // else if (amount == 0 && !didStun && !didPoison)
+        // {
+        //     Console.WriteLine("You missed completely.. \n");
+        // }
         if (didStun)
         {
             Console.WriteLine($"You stunned {name} aswell! Wakey wakey");

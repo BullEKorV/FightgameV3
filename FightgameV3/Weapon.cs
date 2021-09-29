@@ -31,7 +31,7 @@ class Weapon
     {
         if (rnd.NextDouble() > accuracy)
         {
-            Console.WriteLine("Missed oopsi lmao");
+            Console.WriteLine("\nMissed oopsi lmao");
             return;
         }
         int damage = rnd.Next(damageMin, damageMax);
