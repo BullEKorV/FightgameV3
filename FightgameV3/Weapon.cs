@@ -4,20 +4,9 @@ using System.Numerics;
 using System.IO;
 using Newtonsoft.Json;
 
-class Weapons
-{
-    public static List<Weapon> allWeapons = GetWeaponsJson();
-    public static List<Weapon> GetWeaponsJson()
-    {
-        string response = File.ReadAllText("Weapons.json");
-
-        List<Weapon> weapons = JsonConvert.DeserializeObject<List<Weapon>>(response);
-
-        return weapons;
-    }
-}
 class Weapon
 {
+    public static List<Weapon> allWeapons = GetWeaponsJson();
     Random rnd = new Random();
     public string weapon { get; set; }
     public string description { get; set; }
@@ -40,5 +29,13 @@ class Weapon
         bool didPoison = rnd.NextDouble() < poisonChance;
 
         target.TakeDamage(damage, didCrit, didStun, didPoison, weapon);
+    }
+    public static List<Weapon> GetWeaponsJson()
+    {
+        string response = File.ReadAllText("Weapons.json");
+
+        List<Weapon> weapons = JsonConvert.DeserializeObject<List<Weapon>>(response);
+
+        return weapons;
     }
 }

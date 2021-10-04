@@ -55,20 +55,20 @@ class Fighter
     {
         Console.WriteLine($"Choose a weapon of the following:");
 
-        for (int i = 0; i < Weapons.allWeapons.Count; i++)
+        for (int i = 0; i < Weapon.allWeapons.Count; i++)
         {
             Console.CursorLeft += 1;
-            Console.Write(i + 1 + ": " + Weapons.allWeapons[i].weapon.ToUpper());
-            Console.WriteLine(" | " + Weapons.allWeapons[i].description);
+            Console.Write(i + 1 + ": " + Weapon.allWeapons[i].weapon.ToUpper());
+            Console.WriteLine(" | " + Weapon.allWeapons[i].description);
         }
         int choiceInt = -1;
-        while (choiceInt < 1 || choiceInt >= Weapons.allWeapons.Count + 1)
+        while (choiceInt < 1 || choiceInt >= Weapon.allWeapons.Count + 1)
         {
             Console.Write($"Choise: ");
             string choice = Console.ReadLine();
             int.TryParse(choice, out choiceInt);
         }
-        Weapons.allWeapons[choiceInt - 1].Damage(target);
+        Weapon.allWeapons[choiceInt - 1].Damage(target);
         if (target.hp == 0)
         {
             Console.WriteLine(target.name);
